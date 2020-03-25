@@ -51,9 +51,6 @@ public class SQLMain {
 
     public static void main(String[] args) {
 
-        //String startDate = "1997-10-01";
-        //String endDate = "1997-12-31";
-
         SQLMain sqlMain = new SQLMain();
         System.out.print("Enter Start Date: ");
         Scanner scanner = new Scanner(System.in);
@@ -72,12 +69,6 @@ public class SQLMain {
         fName=fName.trim();
         String fileName= sqlMain.isValidFileName(fName);
         System.out.println("FileName "+fileName);
-
-        ///Users/souvikdas/MACS/Assignmnet5/SQLOutput.xml
-
-
-
-
 
         // Variables for the connections and the queries.
         Connection connect = null;      // the link to the database
@@ -185,38 +176,64 @@ public class SQLMain {
                 customerList.appendChild(customerClass);
 
                 Element customerName = document.createElement("customer_name");
-                customerName.appendChild(document.createTextNode(resultSet.getString("customer_name")));
-                customerClass.appendChild(customerName);
+                String cName= resultSet.getString("customer_name");
+                if(cName!=null){
+                    customerName.appendChild(document.createTextNode(cName));
+                }
 
                 Element addressClass = document.createElement("address");
-                customerClass.appendChild(addressClass);
-
                 Element streetAddress = document.createElement("street_address");
-                streetAddress.appendChild(document.createTextNode(resultSet.getString("street_address")));
-                addressClass.appendChild(streetAddress);
+                String sAddress = resultSet.getString("street_address");
+                if(sAddress!=null){
+                    streetAddress.appendChild(document.createTextNode(sAddress));
+                }
 
                 Element city = document.createElement("city");
-                city.appendChild(document.createTextNode(resultSet.getString("city")));
-                addressClass.appendChild(city);
+                String cityString = resultSet.getString("city");
+                if(cityString!=null) {
+                    city.appendChild(document.createTextNode(cityString));
+                }
 
                 Element region = document.createElement("region");
-                region.appendChild(document.createTextNode(resultSet.getString("region")));
-                addressClass.appendChild(region);
+                String region_Check2= resultSet.getString("region");
+                if(region_Check2!=null){
+                    region.appendChild(document.createTextNode(region_Check2));
+                }
 
                 Element postalCode = document.createElement("postal_code");
-                postalCode.appendChild(document.createTextNode(resultSet.getString("postal_code")));
-                addressClass.appendChild(postalCode);
+                String pCode = resultSet.getString("postal_code");
+                if(pCode!=null) {
+                    postalCode.appendChild(document.createTextNode(pCode));
+                }
 
                 Element country = document.createElement("country");
-                country.appendChild(document.createTextNode(resultSet.getString("country")));
+                String countryString = resultSet.getString("country");
+                if(countryString!=null){
+                    country.appendChild(document.createTextNode(countryString));
+                }
+
+                addressClass.appendChild(streetAddress);
                 addressClass.appendChild(country);
+                addressClass.appendChild(city);
+                addressClass.appendChild(postalCode);
+                addressClass.appendChild(region);
 
                 Element numOrders = document.createElement("num_orders");
-                numOrders.appendChild(document.createTextNode(resultSet.getString("num_orders")));
-                customerClass.appendChild(numOrders);
+                String nOrders = resultSet.getString("num_orders");
+                if(nOrders!=null){
+                    numOrders.appendChild(document.createTextNode(nOrders));
+                }
+
 
                 Element orderValue = document.createElement("order_value");
-                orderValue.appendChild(document.createTextNode(resultSet.getString("order_value")));
+                String oValue = resultSet.getString("order_value");
+                if(oValue!=null) {
+                    orderValue.appendChild(document.createTextNode(oValue));
+                }
+
+                customerClass.appendChild(customerName);
+                customerClass.appendChild(addressClass);
+                customerClass.appendChild(numOrders);
                 customerClass.appendChild(orderValue);
 
             }
@@ -229,27 +246,46 @@ public class SQLMain {
                 productList.appendChild(categoryClass);
 
                 Element categoryName = document.createElement("category_name");
-                categoryName.appendChild(document.createTextNode(resultSet2.getString("category_name")));
-                categoryClass.appendChild(categoryName);
+                String cName = resultSet2.getString("category_name");
+                if(cName!=null)
+                {
+                    categoryName.appendChild(document.createTextNode(cName));
+                }
 
                 Element productClass = document.createElement("product");
-                categoryClass.appendChild(productClass);
-
                 Element productName = document.createElement("ProductName");
-                productName.appendChild(document.createTextNode(resultSet2.getString("product_name")));
-                productClass.appendChild(productName);
+
+                String pName = resultSet2.getString("product_name");
+                if(pName!=null){
+                    productName.appendChild(document.createTextNode(pName));
+                }
 
                 Element supplierName = document.createElement("supplier_name");
-                supplierName.appendChild(document.createTextNode(resultSet2.getString("supplier_name")));
-                productClass.appendChild(supplierName);
+                String sName = resultSet2.getString("supplier_name");
+                if(sName!=null) {
+                    supplierName.appendChild(document.createTextNode(sName));
+                }
 
                 Element numProducts = document.createElement("num_products");
-                numProducts.appendChild(document.createTextNode(resultSet2.getString("num_products")));
-                productClass.appendChild(numProducts);
+                String nProducts = resultSet2.getString("num_products");
+                if(nProducts!=null) {
+                    numProducts.appendChild(document.createTextNode(nProducts));
+                }
 
                 Element productValue = document.createElement("product_value");
-                productValue.appendChild(document.createTextNode(resultSet2.getString("product_value")));
+                String pValue = resultSet2.getString("product_value");
+                if(pValue!=null) {
+                    productValue.appendChild(document.createTextNode(pValue));
+                }
+
+                productClass.appendChild(productName);
+                productClass.appendChild(supplierName);
+                productClass.appendChild(numProducts);
                 productClass.appendChild(productValue);
+
+                categoryClass.appendChild(categoryName);
+                categoryClass.appendChild(productClass);
+
 
             }
 
@@ -262,38 +298,63 @@ public class SQLMain {
                 supplierList.appendChild(supplierClass);
 
                 Element supplierName = document.createElement("supplier_name");
-                supplierName.appendChild(document.createTextNode(resultSet3.getString("supplier_name")));
-                supplierClass.appendChild(supplierName);
+                String sName = resultSet3.getString("supplier_name");
+                if(sName!=null) {
+                    supplierName.appendChild(document.createTextNode(sName));
+                }
 
                 Element addressClass = document.createElement("address");
-                supplierClass.appendChild(addressClass);
-
                 Element streetAddress = document.createElement("street_address");
-                streetAddress.appendChild(document.createTextNode(resultSet3.getString("street_address")));
-                addressClass.appendChild(streetAddress);
+                String sAddress = resultSet3.getString("street_address");
+                if(sAddress!=null) {
+                    streetAddress.appendChild(document.createTextNode(sAddress));
+                }
 
                 Element city = document.createElement("city");
-                city.appendChild(document.createTextNode(resultSet3.getString("city")));
-                addressClass.appendChild(city);
+                String cityAddress = resultSet3.getString("city");
+                if(cityAddress!=null) {
+                    city.appendChild(document.createTextNode(cityAddress));
+                }
 
                 Element region = document.createElement("region");
-                region.appendChild(document.createTextNode(resultSet3.getString("region")));
-                addressClass.appendChild(region);
+                String region_Check= resultSet3.getString("region");
+                if(region_Check!=null) {
+                    region.appendChild(document.createTextNode(region_Check));
+                }
 
                 Element postalCode = document.createElement("postal_code");
-                postalCode.appendChild(document.createTextNode(resultSet3.getString("postal_code")));
-                addressClass.appendChild(postalCode);
+                String pCode = resultSet3.getString("postal_code");
+                if(pCode!=null) {
+                    postalCode.appendChild(document.createTextNode(pCode));
+                }
 
                 Element country = document.createElement("country");
-                country.appendChild(document.createTextNode(resultSet3.getString("country")));
+                String countryAddress = resultSet3.getString("country");
+                if(countryAddress!=null) {
+                    country.appendChild(document.createTextNode(countryAddress));
+                }
+
+                addressClass.appendChild(streetAddress);
+                addressClass.appendChild(city);
+                addressClass.appendChild(region);
+                addressClass.appendChild(postalCode);
                 addressClass.appendChild(country);
 
                 Element numProducts = document.createElement("num_products");
-                numProducts.appendChild(document.createTextNode(resultSet3.getString("num_products")));
-                supplierClass.appendChild(numProducts);
+                String nProducts = resultSet3.getString("num_products");
+                if(nProducts!=null) {
+                    numProducts.appendChild(document.createTextNode(nProducts));
+                }
 
                 Element productValue = document.createElement("product_Value");
-                productValue.appendChild(document.createTextNode(resultSet3.getString("product_Value")));
+                String pValue = resultSet3.getString("product_Value");
+                if(pValue!=null) {
+                    productValue.appendChild(document.createTextNode(pValue));
+                }
+
+                supplierClass.appendChild(supplierName);
+                supplierClass.appendChild(addressClass);
+                supplierClass.appendChild(numProducts);
                 supplierClass.appendChild(productValue);
 
             }
