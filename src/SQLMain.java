@@ -380,9 +380,8 @@ public class SQLMain {
         } catch (Exception e) {
 
         } finally {
-            // Always close connections, otherwise the MySQL database runs out of them.
 
-            // Close any of the resultSet, statements, and connections that are open and holding resources.
+            // Closing the resultSet, statements, and connections that are open and holding resources.
             try {
                 if (resultSet != null) {
                     resultSet.close();
